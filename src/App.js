@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
+import TaskList from './TaskList';
+import ToDoForm from './ToDoForm';
 
 class TodoList extends Component {
   constructor(){
     super();
     this.state = {
       todos: [],
-      currentToDo:"",
+      currentToDo:'',
     };
   }
 
@@ -45,26 +47,10 @@ class TodoList extends Component {
   }
 
   render(){
-   // console.log(this.state.todos)
-   //deconstruct todos from state
-   const {todos} = this.state
-    return (
+       return (
       <div className='container'>
-        <form onSumit={this.addItem}>
-          <label htmlFor="tastName">Task Name:</label>
-          <input onChange={this.handleChange} name="taskName"type="text"placeholder="Add todo here!"/>
-          <button type="submit">Add Task</button>
-        </form>
-<ul>
-  {todos.map((el,idx) => {
-    return(
-      <li key={idx}>
-        {el}
-        <button type="button" onClick={() => this.deleteItem(idx)} ></button>
-      </li>
-    )
-  })}
-</ul>
+        <ToDoForm handleChange={this.handleChange} addItem={this.addItem} currentToDo={this.state.currentToDo}/>
+<TaskList todos={this.state.todos} deleteItem={this.deleteItem}/>
 
       </div>
     );
